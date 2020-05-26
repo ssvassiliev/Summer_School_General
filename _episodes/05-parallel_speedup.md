@@ -58,7 +58,7 @@ For example, if 50% of the program can be parallelized, the maximum speedup usin
 
 | Speed Up| Efficiency |
 :---:|:---:
-| ![](../fig/Amdahl's_Law.svg)| ![](../fig/Amdahl_efficiency.svg)|
+| ![](../fig/Amdahl's_Law.svg)| ![](../fig/Amdahl_Efficiency.svg)|
 
 
 Amdahl's law highlights that no matter how fast we make the parallel part of the code, we will always be limited by the serial portion.
