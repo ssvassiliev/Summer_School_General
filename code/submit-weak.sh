@@ -4,7 +4,6 @@
 #SBATCH --time=10:00
 #SBATCH --array=1-16%1
 
-rm output.csv
 N=$SLURM_ARRAY_TASK_ID
 w=2000
 h=2000
@@ -13,5 +12,3 @@ sh=$(printf '%.0f' `echo "scale=6;sqrt($N)*$h" | bc`)
 ./a.out $sw $sh $N
 ./a.out $sw $sh $N
 ./a.out $sw $sh $N
-
-
