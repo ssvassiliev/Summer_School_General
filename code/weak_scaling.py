@@ -30,7 +30,7 @@ for x, y in data:
 t1 /= c1
 
 # Compute and plot speedup
-speedup = t1/data[:, 1]
+speedup = t1*ncpu/data[:, 1]
 plt.plot(ncpu, speedup, 'ok')
 
 # Fit speedup with Amdahl's law
@@ -44,12 +44,13 @@ for i, n in enumerate(ncpu):
 legend = []
 legend.append("data")
 legend.append("fit (s=" '{:.2f}'.format(float(1-popt))+")")
-print(legend)
 print("Serial fraction =", 1-popt)
+plt.figure(1, figsize=(6, 6))
 plt.plot(ncpu, tg, '--k')
 plt.title("Weak Scaling")
 plt.ylabel("Speed Up")
 plt.xlabel("Number of CPUs")
 plt.legend(legend)
 plt.grid(True)
-plt.show()
+plt.savefig("weak_scaling.svg")
+#plt.show()

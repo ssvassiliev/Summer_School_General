@@ -31,6 +31,7 @@ t1 /= c1
 
 # Compute and plot speedup
 speedup = t1/data[:, 1]
+plt.figure(1, figsize=(6, 6))
 plt.plot(ncpu, speedup, 'ok')
 
 # Fit speedup with Amdahl's law
@@ -52,6 +53,7 @@ plt.ylabel("Speed Up")
 plt.xlabel("Number of CPUs")
 plt.legend(legend)
 plt.grid(True)
+plt.savefig("strong_scaling.svg")
 plt.show()
 
 #Efficiency[1, i] = 100*SpeedUp[1, i]/N
