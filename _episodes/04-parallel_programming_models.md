@@ -44,9 +44,10 @@ Vectorization can be used to work on more than one unit of data at a time.
 
 ![](../fig/parallel_app_2.svg)
 
-- Most processors today have vector units that allow processors to operate on more than one piece of data (int, float,double) at a time.  For example, a vector operation shown in the figure is conducted on four doubles. This operation can be executed in a single clock cycle, with little overhead costs to the serial operation.
+- Most processors today have vector units that allow processors to operate on more than one piece of data (int, float,double) at a time.  For example, a vector operation shown in the figure is conducted on eight floats. This operation can be executed in a single clock cycle, with little overhead costs to the serial operation.
 
-##### Example AVX/AVX2 program
+##### Example AVX2 program
+avx2_example.c
 ~~~
 #include <immintrin.h>
 #include <stdio.h>
@@ -87,6 +88,40 @@ POSIX Threads (Pthreads) and OpenMP represent two most popular implementations o
 
 On the other hand, OpenMP is much higher level and much simpler to use.
 
+##### Example OpenMP program
+omp_example.c
+~~~
+#include <omp.h>
+#include <stdio.h>
+
+int main()
+{
+
+int i;
+int n=10;
+float a[n];
+float b[n];
+
+for (i = 0; i < n; i++)
+    a[i] = i;
+
+#pragma omp parallel for
+/* i is private by default */
+for (i = 1; i < n; i++)
+    {
+     b[i] = (a[i] + a[i-1]) / 2.0;
+    }
+
+for (i = 1; i < n; i++)
+    printf("%f ", b[i]);
+printf("\n");
+return(0);
+}
+~~~
+{: .source}
+- Compiling: gcc -fopenmp
+- Running: OMP_NUM_THREADS
+
 
 #### Distributed memory / Message Passing
 
@@ -99,6 +134,34 @@ Tasks exchange data through communications by sending and receiving messages.
 OpenMPI and Intel MPI are two of the most popular implementations of message passing multiprocessing models installed on Compute Canada Systems.
 
 ![](../fig/parallel_app_4.svg)
+
+##### MPI example
+mpi_example.c
+~~~
+#include <mpi.h>
+#include <stdio.h>
+
+int main(int argc, char** argv) {
+    // Initialize the MPI environment
+    MPI_Init(NULL, NULL);
+
+    // Get the number of processes
+    int world_size;
+    MPI_Comm_size(MPI_COMM_WORLD, &world_size);
+
+    // Get the rank of the process
+    int world_rank;
+    MPI_Comm_rank(MPI_COMM_WORLD, &world_rank);
+
+    // Print off a hello world message
+    printf("Hello world from rank %d out of %d Processors\n", world_rank, world_size);
+
+    // Finalize the MPI environment.
+    MPI_Finalize();
+}
+~~~
+- Compiling: gcc mpi_example.c -lmpi
+- Running: srun -n 4 -A def-sponsor0 ./a.out
 
 - Passing messages takes time
 
