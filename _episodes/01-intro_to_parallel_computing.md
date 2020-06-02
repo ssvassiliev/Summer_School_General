@@ -1,19 +1,17 @@
 ---
 title:  "Introduction"
 teaching: 10
-exercises:
+exercises: 5
 questions:
 - "What parallel computing is and why it is important?"
 - "How does a parallel program work?"
-- "What factors are limiting parallel speed up"
 objectives:
 - "Explain differences between a serial and a parallel program"
-- "Discuss advantages and disadvantades of parallel. programming."
-- "Explain limits to parallel speedup."
+- "Introduce types of parallelism available in modern computers"
 
 keypoints:
 - "Parallel computing is much better suited for modeling, simulating and understanding complex, real-world phenomena."
-- "Parallel speedup is limited by serial fraction of code and problem size."
+- "Modern computers have several levels of parallelism"
 ---
 
 The ACENET Parallel Programming Summer School will focus on teaching students the basics of parallel programming. This will include lessons in shared memory programming (through OpenMP), message passing parallel programming (through MPI) and GPGPU programming (through CUDA), DASK and Machine Learning.

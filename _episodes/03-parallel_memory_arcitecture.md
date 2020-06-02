@@ -3,12 +3,13 @@ title: "Memory Organisations of Parallel Computers"
 teaching: 10
 exercises: 0
 questions:
-- "Key question (FIXME)"
+- "How is computer memory in parallel computers organized?"
 objectives:
-- "Discuss the Flynn’s classification based on instruction and data streams"
+- "Introduce types of memory orgranization in  parallel computers"
+- "Discuss impilcations of computer memory organization for parallel programming"
 
 keypoints:
-- "First key point. Brief Answer to questions. (FIXME)"
+- "The amount of information that must be shared by parallel tasks is one of the key parameters dictating choice of memory model."
 ---
 
 The organization of the memory system is second, equally important, aspect of high performance computing. If the memory cannot keep up and provide instructions and data at a sufficient rate there will be no improvement in performance.

@@ -1,18 +1,18 @@
 ---
-title: "Architectures of Parallel Computers"
+title:  "Prallel Computers"
 teaching: 10
-exercises: 0
+exercises:
 questions:
-- "What parallel computing is and why it is important"
-- "Where "
+- "How is a typical CPU  organized?"
+- "What are 4 major groups of computer architectures"
 objectives:
 - "Explain the various criteria on which classification of parallel computers are based"
-- "Discuss the Flynn’s classification based on instruction and data streams"
+- "Introduce the Flynn’s classification"
 
 keypoints:
-- "First key point. Brief Answer to questions. (FIXME)"
+- "Parallel computers follow basic von Neumann CPU design"
+- "Parallel computers can be divided in 4 grops  based on the number of instruction and data streams"
 ---
-
 
 To make a full use of compute resources the programmer needs to have a working knowledge of the parallel programming concepts and tools available for writing parallel applications. To build a basic understanding of how parallel computing works, let's start with an explanation of the components that comprise computers and their function.
 
@@ -57,7 +57,7 @@ Today there is no completely satisfactory classification of the different types 
 
 ### Flynn's classification of Parallel Computers
 
-- Flynn’s classification scheme is based on the notion of a stream of information. Two types of information flow into a processor: instructions and data.
+- Flynn’s classification scheme is based on the multiplicity of information streams. Two types of information flow into a processor: instructions and data.
 - The instruction stream is defined as the sequence of instructions performed by the processing unit.
 - The data stream is defined as the data traffic exchanged between the memory and the processing unit.
 
@@ -78,7 +78,6 @@ Historical supercomputers such as the Control Data Corporation 6600.
 - The processor array is a set of identical synchronized processing elements capable of simultaneously performing the same operation on different data.
 - The application program is executed by the front-end in the usual serial way, but issues commands to the processor array to carry out SIMD operations in parallel.
 
-Figure
 
 All modern desktop/laptop processors are classified as SIMD systems.
 

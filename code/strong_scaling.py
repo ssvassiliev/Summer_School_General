@@ -55,5 +55,3 @@ plt.legend(legend)
 plt.grid(True)
 plt.savefig("strong_scaling.svg")
 plt.show()
-
-#Efficiency[1, i] = 100*SpeedUp[1, i]/N

@@ -1,14 +1,17 @@
 ---
 title: "Parallel Programming Models"
-teaching: 0
+teaching: 15
 exercises: 0
 questions:
-- "Key question (FIXME)"
+- "What levels of parallelizm are available in moderm computer systems?"
+- "How can a parallel program access different levels of parallelization?"
 objectives:
-- "Discuss the Flynn’s classification based on instruction and data streams"
+- "Explain parallelism in modern computer systems"
+- "Introduce parallel programming models"
 
 keypoints:
-- "First key point. Brief Answer to questions. (FIXME)"
+- "There are many layers of parallelism in modern computer systems"
+- "An application can implement vectorization, multithreading and message passing"
 ---
 
 ### Parallel Programming Models
@@ -97,10 +100,7 @@ OpenMPI and Intel MPI are two of the most popular implementations of message pas
 
 ![](../fig/parallel_app_4.svg)
 
-
-
 - Passing messages takes time
-
 
 
 #### Resources:
@@ -111,11 +111,5 @@ https://www.codeproject.com/Articles/874396/Crunching-Numbers-with-AVX-and-AVX)
 3. [Getting Started with OpenMP](https://software.intel.com/en-us/articles/getting-started-with-openmp)
 4. [More OpenMP Books](https://www.openmp.org/resources/openmp-books)
 
-[Summer School OpenMPI (GitHub)](https://github.com/acenet-arc/ACENET_Summer_School_OpenMP)
-[Summer School OpenMPI (Site)](https://acenet-arc.github.io/ACENET_Summer_School_OpenMP)
-
-
-[Summer School General (GitHub)](https://github.com/acenet-arc/ACENET_Summer_School_General)
-[Summer School General (Site)](https://acenet-arc.github.io/ACENET_Summer_School_General)
 
 {% include links.md %}

@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH -A def-svassili
+#SBATCH -A def-sponsor0
 #SBATCH --cpus-per-task=16
 #SBATCH --time=10:00
 #SBATCH --array=1-16%1

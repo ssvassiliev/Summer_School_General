@@ -1,19 +1,17 @@
 ---
-title: "The limit to parallel computing speedup"
-teaching: 0
-exercises: 0
+title: "Parallel Performance and Scalability"
+teaching: 30
+exercises: 20
 questions:
-- "Key question (FIXME)"
+- How to use parallel computers efficiently
 objectives:
-- "Discuss the Flynn’s classification based on instruction and data streams"
+- Understand limits to parallel speedup
+- Learn how to measure parallel scaling
 keypoints:
 - Increase of the number of processors leads to decrease of efficiency.
 - Increase of problem size causes increase of efficiency
-- scalable parallel system can keep efficiency by increasing the number of processors and the problem size simultaneously.
+- Parallel problem can be solved efficiently by increasing the number of processors and the problem size simultaneously
 ---
-
-
-### Parallel Performance and Scalability.
 
 #### Speedup
 Parallel speedup is defined straightforwardly as ratio of the serial runtime of the best sequential algorithm to the time taken by the parallel algorithm to solve the same problem on $N$ processors:
@@ -71,7 +69,6 @@ This type of problem scaling is referred to as *Strong Scaling*.
 
 ![](../fig/strong_scaling.svg)
 
-
 #### Gustafson's law
 
 In practice users should increase the size of the problem as more processors are added. The run-time scaling for this scenario is called *Weak Scaling*.
@@ -127,7 +124,23 @@ To measure weak scaling we run the code with different numbers of threads and wi
 
 Once the runs are completed we fit the strong and weak scaling results with  Amdahl’s and Gustafson’s equations to obtain the ratio of the serial part (s) and the parallel part (p).
 
-#### Compiling and Running
+#### Log in to magic castle
+~~~
+ssh -X user01@206.12.93.147
+Users: user01-30
+Password: ***
+~~~
+
+Please try not make mistakes entering password. You computer will be banned for 24 hours if you make a mistake.
+
+#### Compiling and Running Example
+
+1. Download and unpack the code:
+    ~~~
+    wget https://github.com/ssvassiliev/Summer_School_General/raw/master/code/julia_set.tar.gz
+    tar -xf julia_set.tar.gz
+    ~~~
+    {: .source}
 
 1. Compile the program *julia_set_openmp.c*
     ~~~
@@ -161,12 +174,11 @@ Once the runs are completed we fit the strong and weak scaling results with  Amd
 3. To measure strong scaling submit array job: *sbatch submit_strong.sh*
     ~~~
     #!/bin/bash
-    #SBATCH -A def-somebody
+    #SBATCH -A def-sponsor0
     #SBATCH --cpus-per-task=16
     #SBATCH --time=1:0
     #SBATCH --array=1-16%1 # Run 16 jobs, one job at a time
 
-    rm output.csv
     # Run the code 3 times to get some statistics
     ./a.out 2000 2000 $SLURM_ARRAY_TASK_ID
     ./a.out 2000 2000 $SLURM_ARRAY_TASK_ID
@@ -176,102 +188,65 @@ Once the runs are completed we fit the strong and weak scaling results with  Amd
 
     Timing results will be saved in *output.csv*
 
-4. Fit data with Amdahl's law equation: *strong_scaling.py*
+4. Fit data with Amdahl's law
+    ~~~
+    module load python scipy-stack
+    mv output.csv strong_scaling.csv
+    python strong_scaling.py
+    ~~~
+    {: .source}
+    ![](../code/strong_scaling.svg)
 
 
-#### Static vs. Dynamic Schedule
-Schedule refers to the way the individual values of the loop variable, are spread across the threads. Static means that it is decided at the beginning which thread will do which values. Dynamic means that each thread will work on a chunk of values and then take the next chunk which hasn't been worked on by any thread. The latter allows better balancing (in case the work varies between different values for the loop variable), but requires some communication overhead.
+> ## Testing weak scaling
+>
+> 1. Modify the submission script to test weak scaling and rerun the test.
+> 2. Modify python script to fit weak scaling data. Compare serial fraction and speedup values obtained using stong and weak scaling tests.
+>
+> > ## Solution
+> > Submission script for measuring weak scaling
+> > ~~~
+> > #!/bin/bash
+> > #SBATCH -A def-sponsor0
+> > #SBATCH --cpus-per-task=16
+> > #SBATCH --time=10:00
+> > #SBATCH --array=1-16%1
+> > N=$SLURM_ARRAY_TASK_ID
+> > w=2000
+> > h=2000
+> > sw=$(printf '%.0f' `echo "scale=6;sqrt($N)*$w" | bc`)
+> > sh=$(printf '%.0f' `echo "scale=6;sqrt($N)*$h" | bc`)
+> >./a.out $sw $sh $N
+> >./a.out $sw $sh $N
+> >./a.out $sw $sh $N
+> > ~~~
+> > {: .source}
+> > To simplify the submission script you could scale only width.
+> >
+> > Use Gustafson's law function to fit weak scaling data:
+> > ~~~
+> > def gustafson(ncpu, p):
+> >    return ncpu-(1-p)*(ncpu-1)
+> > ~~~
+> > {: .source}
+> > Full script 'submit_weak.sh' is included in julia_set.tar.gz
+> {: .solution}
+{: .challenge}
 
-#### Communication costs
+#### Scheduling Threads in OpenMP.
+Schedule refers to the way the individual values of the loop variable, are spread across the threads. Static schedule means that it is decided at the beginning which thread will do which values. Dynamic means that each thread will work on a chunk of values and then take the next chunk which hasn't been worked on by any thread. The latter allows better balancing (in case the work varies between different values for the loop variable), but requires some communication overhead.
 
-Latency is the time from when the first bit leaves the transmitter until the last is received.
-
-![ ](../fig/latency.svg)
+> ## Improving Parallel Performance
+>
+> Add 'schedule(dynamic)' statement to #pragma openmp block, recompile the code and rerun strong scaling test.
+> Compare test results with and without dynamic scheduling.
+>
+> Why dynamic sceduling improves parallel speedup for this problem?
+{: .challenge}
 
 References:
 
 1. Amdahl, Gene M. (1967). AFIPS Conference Proceedings. (30): 483–485. doi: 10.1145/1465482.1465560
 2. Gustafson, John L. (1988). Communications of the ACM. 31 (5): 532–533. doi: 10.1145/42411.42415
-3. [Infiniband latency data](https://doi.org/10.5815/ijcnis.2016.10.02)
 
-
-### Input and Output
-
-Objectives
-- Sketch the storage structure of a generic, typical cluster
-- Understand the terms “local disk”, “IOPS”, “SAN”, “metadata”, “parallel I/O”
-
-[Intel SSD](https://www.intel.ca/content/www/ca/en/products/docs/memory-storage/solid-state-drives/data-center-ssds/dc-p4610-p4618-series-brief.html)
-[HDF5](https://portal.hdfgroup.org/display/HDF5/HDF5)
-[LUSTRE](http://lustre.org/about/)
-[GPFS](https://www.ibm.com/support/knowledgecenter/en/STXKQY_4.2.0/com.ibm.spectrum.scale.v4r2.ins.doc/bl1ins_intro.htm)
-[IOR](https://ior.readthedocs.io/en/latest/index.html)
-
-Cluster storage
-Recall what you learned about cluster architecture in the Intro to ACENET, or look at the video here: https://www.youtube.com/watch?v=VxmTbDfelmA
-
-There is a login node (or maybe more than one).
-There might be a data transfer node (DTN), which is basically a login node specially designated for doing (!) data transfers.
-There are a lot of compute nodes. The compute nodes may or may not have local disk.
-Most I/O goes to a storage array or SAN (Storage Array Network).
-Broadly, you have two choices: You can do I/O to the node-local disk (if there is any), or you can do I/O to the SAN. Local disk suffers little or no contention, but is inconvenient.
-
-Local disk
-What are the inconveniences of local disk? What sort of work patterns suffer most from this? What suffers least? That is, what sort of jobs can use local disk most easily?
-Local disk performance depends on a lot of things. If you’re interested you can get an idea from here: What-is-the-throughput-of-15k-rpm-sas-drive
-
-For that particular disk model, throughput 16MB/s to 200MB/s depending on how you do it
-IOPS (IO operations per second) 150-200
-Most input and output on a cluster goes through the SAN.
-
-There are many architectural choices made in constructing a SAN.
-
-What technology? Lustre popular these days. ACENET & Compute Canada use it. GPFS is another…
-How many servers, and how many disks in each? What disks?
-How many MDS? MDS = MetaData Server. Things like ‘ls’ only require metadata. Exactly what is handled by the MDS (or even if there is one) may depend on the technology chosen (e.g. Lustre).
-What switches and how many of them?
-Are things wired together with fibre or with ethernet? What’s the wiring topology?
-Where is there redundancy or failovers, and how much? This is all the domain of the sysadmins, but what should you as the user do about it?
-If you’re doing parallel computing you have further choices about how you do that.
-
-File-per-process is reliable, portable and simple, but lousy for checkpointing and restarting.
-
-Many small files on a SAN (or anywhere, really) leads to metadata bottlenecks. Most HPC filesystems assume no more than 1,000 files per directory.
-
-Parallel I/O (e.g. MPI-IO) -> many processes, one file
-Solves restart problems, but requires s/w infrastructure and programming
-
-High-level interfaces like NetCDF and HDF5 are highly recommended
-I/O bottlenecks:
-Disk read-write rate. Alleviated by striping.
-Fibre bandwidth (or Ethernet or …)
-Switch capacity.
-Metadata accesses (especially if only one MDS)
-Measuring I/O rates
-Look into IOR on GitHub or SourceForge
-Read this 2007 paper, Using IOR to Analyze the I/O performance for HPC Platforms
-Neither of these are things to do right this minute!
-— Takeaways:
-
-I/O is complicated. If you really want to know what performs best, you’ll have to experiment.
-A few large IO operations are better than many small ones.
-A few large files are usually better than many small files.
-High-level interfaces (e.g. HDF5) are your friend, but even they’re not perfect.
-Moving data on and off a cluster
-“Internet” cabling varies a lot. 100Mbit/s widespread, 1Gbit becoming common, 10Gbit or more between most CC sites
-Canarie is the Cdn research network. Check out their “weather map”
-Firewalls sometimes the problem - security versus speed
-
-Filesystem at sending or receiving end often the bottleneck (SAN or simple disk)
-What are typical disk I/O rates? See above! Highly variable!
-Estimating transfer times
-How long to move a gigabyte at 100Mbit/s?
-How long to move a terabyte at 1Gbit/s?
-Solution
-Remember a byte is 8 bits, a megabyte is 8 megabits, etc.
-
-1024MByte/GByte * 8Mbit/MByte / 100Mbit/sec = 81 sec
-8192 sec = 2 hours and 20 minutes
-Remember these are “theoretical maximums”! There is almost always some other bottleneck or contention that reduces this!
-Restartable downloads (wget? rsync? Globus!)
-checksumming (md5sum) to verify integrity of large transfers
+{% include links.md %}

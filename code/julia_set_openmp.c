@@ -44,7 +44,7 @@ int main ( int argc, char* argv[] )
 
   Licensing:
 
-    This code is distributed under the GNU LGPL license. 
+    This code is distributed under the GNU LGPL license.
 
   Modified:
 
@@ -87,7 +87,7 @@ int main ( int argc, char* argv[] )
   FILE *fp;
   fp=fopen("output.csv", "a");
   fprintf(fp, "%i, %f\n",th,t2);
-  fclose(fp);	  
+  fclose(fp);
 
   tga_write ( w, h, rgb, "julia_openmp.tga" );
 /*
@@ -115,7 +115,7 @@ unsigned char *julia_set ( int w, int h, int th, float xl, float xr, float yb, f
 
   Licensing:
 
-    This code is distributed under the GNU LGPL license. 
+    This code is distributed under the GNU LGPL license.
 
   Modified:
 
@@ -143,7 +143,7 @@ unsigned char *julia_set ( int w, int h, int th, float xl, float xr, float yb, f
 
   rgb = ( unsigned char * ) malloc ( w * h * 3 * sizeof ( unsigned char ) );
 
-# pragma omp parallel for schedule(dynamic) \
+# pragma omp parallel for \
   shared ( h, w, xl, xr, yb, yt ) \
   private ( i, j, k, juliaValue )
     for ( j = 0; j < h; j++ )
@@ -159,7 +159,7 @@ unsigned char *julia_set ( int w, int h, int th, float xl, float xr, float yb, f
         rgb[k+2] = 255;
       }
     }
-  
+
 
   return rgb;
 }
@@ -179,7 +179,7 @@ int julia ( int w, int h, float xl, float xr, float yb, float yt, int i, int j )
 
   Licensing:
 
-    This code is distributed under the GNU LGPL license. 
+    This code is distributed under the GNU LGPL license.
 
   Modified:
 
@@ -208,11 +208,11 @@ int julia ( int w, int h, float xl, float xr, float yb, float yt, int i, int j )
   Convert (I,J) indices to (X,Y) coordinates.
 */
   x = ( ( float ) ( w - i - 1 ) * xl
-      + ( float ) (     i     ) * xr ) 
+      + ( float ) (     i     ) * xr )
       / ( float ) ( w     - 1 );
 
   y = ( ( float ) ( h - j - 1 ) * yb
-      + ( float ) (     j     ) * yt ) 
+      + ( float ) (     j     ) * yt )
       / ( float ) ( h     - 1 );
 /*
   Think of (X,Y) as real and imaginary components of
@@ -269,7 +269,7 @@ void tga_write ( int w, int h, unsigned char rgb[], char *filename )
   FILE *file_unit;
   unsigned char header1[12] = { 0,0,2,0,0,0,0,0,0,0,0,0 };
   unsigned char header2[6] = { w%256, w/256, h%256, h/256, 24, 0 };
-/* 
+/*
   Create the file.
 */
   file_unit = fopen ( filename, "wb" );
@@ -293,4 +293,3 @@ void tga_write ( int w, int h, unsigned char rgb[], char *filename )
 
   return;
 }
-
