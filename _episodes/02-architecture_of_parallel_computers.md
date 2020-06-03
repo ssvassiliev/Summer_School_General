@@ -62,7 +62,7 @@ Today there is no completely satisfactory classification of the different types 
 
 In Flynn’s classification, either of the instruction or data streams can be single or multiple. Thus computer architecture can be classified into the following four distinct categories:
 
-![](../fig/Flynns_classification.svg)
+![](../fig/Flynns_Classification.svg)
 
 
 #### SISD
