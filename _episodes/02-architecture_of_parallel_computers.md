@@ -20,8 +20,7 @@ To make a full use of compute resources the programmer needs to have a working k
 
 Von Neumann architecture was first published by John von Neumann in 1945. It is based on the stored-program computer concept where computer memory is used to store both program instructions and data. Program instructions tell the computer to do something.
 
-
-<img src="../fig/von_Neumann.svg">
+![](../fig/von_Neumann.svg)
 
 - Central Processing Unit:
     -  the electronic circuit responsible for executing the instructions of a computer program.
@@ -63,7 +62,7 @@ Today there is no completely satisfactory classification of the different types 
 
 In Flynn’s classification, either of the instruction or data streams can be single or multiple. Thus computer architecture can be classified into the following four distinct categories:
 
-<img src="../fig/Flynns_classification.svg">
+![](../fig/Flynns_classification.svg)
 
 
 #### SISD
