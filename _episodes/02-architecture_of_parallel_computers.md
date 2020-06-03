@@ -1,5 +1,5 @@
 ---
-title:  "Prallel Computers"
+title:  "Parallel Computers"
 teaching: 10
 exercises:
 questions:
