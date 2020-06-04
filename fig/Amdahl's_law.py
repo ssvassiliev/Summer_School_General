@@ -17,7 +17,7 @@ for j, s in enumerate(S):
         N = pow(2, i*0.5)
         SpeedUp[0, i] = N
         SpeedUp[1, i] = 1/(s+P/N)
-    plt.plot(Efficiency[0, :], Efficiency[1, :])
+    plt.plot(SpeedUp[0, :], SpeedUp[1, :])
     legend.append("s = " '{:.2f}'.format(s))
     # plt.title("Amdahl's Law")
 plt.legend(legend)
