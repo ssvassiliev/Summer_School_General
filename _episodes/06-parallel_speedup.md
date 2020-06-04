@@ -16,7 +16,7 @@ keypoints:
 #### Speedup
 Parallel speedup is defined straightforwardly as ratio of the serial runtime of the best sequential algorithm to the time taken by the parallel algorithm to solve the same problem on $N$ processors:
 
-$ SpeedUP = \frac{T_s}{T_p}$
+$$ SpeedUP = \frac{T_s}{T_p}$$
 
 Where $T_s$ is sequential runtime and $T_p$ is parallel runtime
 
@@ -28,7 +28,7 @@ Typically a program solving a large problem consists of parallelizable and non-p
 
 Scalability (also referred to as efficiency) is the ratio between the actual speedup and the ideal speedup obtained when using a certain number of processors. Considering that the ideal speedup of a serial program is proportional to the number of parallel processors:
 
-$Efficiency=\frac{SpeedUP}{N}=\frac{T_s}{T_p*N}$
+$$Efficiency=\frac{SpeedUP}{N}=\frac{T_s}{T_p*N}$$
 
 Efficiency can be also understood as the fraction of time for which a processor is usefully utilized.
 
@@ -44,6 +44,7 @@ The dependence of the maximum speedup of an algorithm on the number of parallel 
 We can rewrite $T_s$ and $T_p$ in terms of parallel overhead cost $K$, serial fraction of code $S$, parallel fraction of code $P$ and the number of processes $N$:
 
 $$T_s = S + P$$
+
 $$T_p = S + \frac{P}{N} + K$$
 
 Assuming that $K$ is negligibly small (very optimistic) and considering that $S+P=1$:
