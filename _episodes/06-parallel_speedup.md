@@ -43,8 +43,8 @@ The dependence of the maximum speedup of an algorithm on the number of parallel 
 
 We can rewrite $T_s$ and $T_p$ in terms of parallel overhead cost $K$, serial fraction of code $S$, parallel fraction of code $P$ and the number of processes $N$:
 
-$T_s = S + P$
-$T_p = S + \frac{P}{N} + K$
+$$T_s = S + P$$
+$$T_p = S + \frac{P}{N} + K$$
 
 Assuming that $K$ is negligibly small (very optimistic) and considering that $S+P=1$:
 
