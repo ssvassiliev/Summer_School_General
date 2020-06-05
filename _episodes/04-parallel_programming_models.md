@@ -1,7 +1,7 @@
 ---
 title: "Parallel Programming Models"
 teaching: 15
-exercises: 0
+exercises: 10
 questions:
 - "What levels of parallelizm are available in moderm computer systems?"
 - "How can a parallel program access different levels of parallelization?"

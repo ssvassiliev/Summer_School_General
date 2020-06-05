@@ -3,6 +3,8 @@ title: "Input and Output"
 teaching: 10
 exercises: 5
 questions:
+- How is input/output in HPC clusters organized?
+- How do I optimize input/output in HPC environment?
 objectives:
 - Sketch the storage structure of a generic, typical cluster
 - Understand the terms “local disk”, “IOPS”, “SAN”, “metadata”, “parallel I/O”

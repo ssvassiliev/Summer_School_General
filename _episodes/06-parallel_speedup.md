@@ -1,16 +1,16 @@
 ---
 title: "Parallel Performance and Scalability"
 teaching: 30
-exercises: 20
+exercises: 30
 questions:
-- How to use parallel computers efficiently
+- How to use parallel computers efficiently?
 objectives:
-- Understand limits to parallel speedup
-- Learn how to measure parallel scaling
+- Understand limits to parallel speedup.
+- Learn how to measure parallel scaling.
 keypoints:
 - Increase of the number of processors leads to decrease of efficiency.
-- Increase of problem size causes increase of efficiency
-- Parallel problem can be solved efficiently by increasing the number of processors and the problem size simultaneously
+- Increase of problem size causes increase of efficiency.
+- Parallel problem can be solved efficiently by increasing the number of processors and the problem size simultaneously.
 ---
 
 #### Speedup

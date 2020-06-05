@@ -1,17 +1,17 @@
 ---
 title:  "Parallel Computers"
 teaching: 10
-exercises:
+exercises: 0
 questions:
-- "How is a typical CPU  organized?"
-- "What are 4 major groups of computer architectures"
+- How is a typical CPU  organized?
+- What are 4 major groups of computer architectures?
 objectives:
-- "Explain the various criteria on which classification of parallel computers are based"
-- "Introduce the Flynn’s classification"
+- Explain the various criteria on which classification of parallel computers are based.
+- Introduce the Flynn’s classification.
 
 keypoints:
-- "Parallel computers follow basic von Neumann CPU design"
-- "Parallel computers can be divided in 4 grops  based on the number of instruction and data streams"
+- Parallel computers follow basic von Neumann CPU design.
+- Parallel computers can be divided in 4 grops  based on the number of instruction and data streams.
 ---
 
 To make a full use of compute resources the programmer needs to have a working knowledge of the parallel programming concepts and tools available for writing parallel applications. To build a basic understanding of how parallel computing works, let's start with an explanation of the components that comprise computers and their function.

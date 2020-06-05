@@ -2,6 +2,8 @@
 title: "Independent tasks and job schedulers"
 teaching: 5
 exercises: 5
+questions:
+- How to run a number of independent jobs in parallel?
 objectives:
 - Be able to identify a problem of independent tasks
 - Use a scheduler like SLURM to submit an array job
