@@ -125,16 +125,7 @@ To measure weak scaling we run the code with different numbers of threads and wi
 
 Once the runs are completed we fit the strong and weak scaling results with  Amdahl’s and Gustafson’s equations to obtain the ratio of the serial part (s) and the parallel part (p).
 
-#### Log in to magic castle
-~~~
-ssh -X user01@206.12.93.147
-Users: user01-30
-Password: ***
-~~~
-
-Please try not make mistakes entering password. You computer will be banned for 24 hours if you make a mistake.
-
-#### Compiling and Running Example
+#### Compiling and Running the Example
 
 1. Download and unpack the code:
     ~~~
