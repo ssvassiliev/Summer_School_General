@@ -1,5 +1,5 @@
 ---
-title: "Analyzing Performance using a Profiler"
+title: "Analyzing Performance Using a Profiler"
 teaching: 30
 exercises: 20
 questions:

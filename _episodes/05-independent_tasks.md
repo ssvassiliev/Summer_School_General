@@ -1,5 +1,5 @@
 ---
-title: "Independent tasks and job schedulers"
+title: "Independent Tasks and Job Schedulers"
 teaching: 5
 exercises: 5
 questions:
