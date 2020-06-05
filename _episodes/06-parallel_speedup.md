@@ -230,7 +230,7 @@ Schedule refers to the way the individual values of the loop variable, are sprea
 
 > ## Improving Parallel Performance
 >
-> Add 'schedule(dynamic)' statement to #pragma openmp block, recompile the code and rerun strong scaling test.
+> Add 'schedule(dynamic)' statement to #pragma openmp block (line 146), recompile the code and rerun strong scaling test.
 > Compare test results with and without dynamic scheduling.
 >
 > Why dynamic sceduling improves parallel speedup for this problem?
