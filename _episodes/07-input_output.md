@@ -3,7 +3,7 @@ title: "Input and Output"
 teaching: 10
 exercises: 5
 questions:
-- How is input/output in HPC clusters organized?
+- How is input/output in the HPC clusters organized?
 - How do I optimize input/output in HPC environment?
 objectives:
 - Sketch the storage structure of a generic, typical cluster
@@ -14,18 +14,18 @@ keypoints:
 ## Cluster storage
 ### Cluster Architecture
 - There is a login node (or maybe more than one).
-- There might be a data transfer node (DTN), which is basically a login node specially designated for doing (!) data transfers.
-- There are a lot of compute nodes. The compute nodes may or may not have local disk.
+- There might be a data transfer node (DTN), which is a login node specially designated for doing (!) data transfers.
+- There are a lot of compute nodes. The compute nodes may or may not have a local disk.
 - Most I/O goes to a storage array or SAN (Storage Array Network).
 
-Broadly, you have two choices: You can do I/O to the node-local disk (if there is any), or you can do I/O to the SAN. Local disk suffers little or no contention, but is inconvenient.
+Broadly, you have two choices: You can do I/O to the node-local disk (if there is any), or you can do I/O to the SAN. Local disk suffers little or no contention but is inconvenient.
 
 > ## Local disk
 >
-> What are the inconveniences of local disk? What sort of work patterns suffer most from this? What suffers least? That is, what sort of jobs can use local disk most easily?
+> What are the inconveniences of a local disk? What sort of work patterns suffer most from this? What suffers the least? That is, what sort of jobs can use local disk most easily?
 {: .challenge}
 
-Local disk performance depends on a lot of things. If you’re interested you can get an idea about Intel data center solid state drives [here](https://www.intel.ca/content/www/ca/en/products/docs/memory-storage/solid-state-drives/data-center-ssds/dc-p4610-p4618-series-brief.html).
+Local disk performance depends on a lot of things. If you’re interested you can get an idea about Intel data center solid-state drives [here](https://www.intel.ca/content/www/ca/en/products/docs/memory-storage/solid-state-drives/data-center-ssds/dc-p4610-p4618-series-brief.html).
 
 For that particular disk model, sequential read/write speed is 3200/3200 MB/sec, It is also capable of 654K/220K IOPS (IO operations per second) for 4K random read/write.
 
@@ -61,12 +61,12 @@ If you’re doing parallel computing you have further choices about how you do t
 > - Neither of these are things to do right this minute!
 {: .challenge}
 
-The most important part you should know is that the parallel filesystem is optimized for storing large shared files which can be possibly accessible from many computing nodes. So, it shows very poor performance to store many small size files. As you may get told in our new user seminar, we strongly recommend users not to generate millions of small size files.
+The most important part you should know is that the parallel filesystem is optimized for storing large shared files that can be possibly accessible from many computing nodes. So, it shows very poor performance to store many small size files. As you may get told in our new user seminar, we strongly recommend users not to generate millions of small size files.
 
 
 —-- Takeaways:
 
-- I/O is complicated. If you really want to know what performs best, you’ll have to experiment.
+- I/O is complicated. If you want to know what performs best, you’ll have to experiment.
 - A few large IO operations are better than many small ones.
 - A few large files are usually better than many small files.
 - High-level interfaces (e.g. HDF5) are your friends, but even they’re not perfect.
@@ -74,11 +74,11 @@ The most important part you should know is that the parallel filesystem is optim
 ## Moving data on and off a cluster
 
 - "Internet" cabling varies a lot. 100Mbit/s widespread, 1Gbit becoming common, 10Gbit or more between *most* CC sites
-- Canarie is the Canadian research network. Check out their [Network website](https://www.canarie.ca/network/)
+- CANARIE is the Canadian research network. Check out their [Network website](https://www.canarie.ca/network/)
 - Firewalls sometimes the problem - security versus speed
 
 - Filesystem at sending or receiving end often the bottleneck (SAN or simple disk)
-- What are typical disk I/O rates? See above! Highly variable!
+- What are the typical disk I/O rates? See above! Highly variable!
 
 > ## Estimating transfer times
 > 1. How long to move a gigabyte at 100Mbit/s?
@@ -95,6 +95,6 @@ The most important part you should know is that the parallel filesystem is optim
 {: .challenge}
 
 - Restartable downloads (wget? rsync? Globus!)
-- checksumming (md5sum) to verify integrity of large transfers
+- checksumming (md5sum) to verify the integrity of large transfers
 
 {% include links.md %}

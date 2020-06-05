@@ -3,7 +3,7 @@ title: "Independent Tasks and Job Schedulers"
 teaching: 5
 exercises: 5
 questions:
-- How to run a number of independent jobs in parallel?
+- How to run several independent jobs in parallel?
 objectives:
 - Be able to identify a problem of independent tasks
 - Use a scheduler like SLURM to submit an array job
@@ -31,7 +31,7 @@ objectives:
 - SLURM: [Job Arrays](https://docs.computecanada.ca/wiki/Job_arrays)
 
 
-An example of a submission script for an array job with the slurm schedular.
+An example of a submission script for an array job with the SLURM scheduler.
 
 ~~~ {.shell}
 #!/bin/bash

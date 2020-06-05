@@ -10,32 +10,35 @@ objectives:
 - "Introduce types of parallelism available in modern computers"
 
 keypoints:
-- "Parallel computing is much better suited for modeling, simulating and understanding complex, real-world phenomena."
+- "Parallel computing is much better suited for modelling, simulating and understanding complex, real-world phenomena."
 - "Modern computers have several levels of parallelism"
 ---
 
-The ACENET Parallel Programming Summer School will focus on teaching students the basics of parallel programming. This will include lessons in shared memory programming (through OpenMP), message passing parallel programming (through MPI) and GPGPU programming (through CUDA), DASK and Machine Learning.
+Introduce setup and connection to cluster someplace before using examples.
+Concrete examples of weak/strong scaling.
+Drive by nature of the problem.
+Compilers auto avx. Specific loop structure.
 
 ### Why to learn parallel computing?
 - Building faster serial computers became constrained due to both physical and practical reasons.
 
-- The increase in serial performance slowed down because processor designs aproached limits of miniaturization, clock frequency, power consumption, data transmission speed.
+- The increase in serial performance slowed down because processor designs approached limits of miniaturization, clock frequency, power consumption, data transmission speed.
 
 - It is increasingly expensive to make a single processor faster. Using a larger number of moderately fast commodity processors to achieve the same (or better) performance is more practical.
 
 
 ### Parallel Computing Applications
 
-Here are just a few examples how parallel computing is helping to accelerate research and solve the previously unsolvable problems.
+Here are just a few examples of how parallel computing is helping to accelerate research and solve the previously unsolvable problems.
 
 1. Numeric Weather prediction
     - Taking current observations uses mathematical models  to forecast the future state of the weather
 2. Computational Astrophysics
     -  Numerical relativity, magnetohydrodynamics, stellar and galactic magnetohydrodynamics
 3. Seismic Data Processing
-    - Analyse seismic data to find oil and gas bearing layers
+    - Analyze seismic data to find oil and gas-bearing layers
 4. Commercial world
-    - Nearly every major aspect of today’s banking, from credit scoring to risk modeling to fraud detection, is GPU-accelerated.
+    - Nearly every major aspect of today’s banking, from credit scoring to risk modelling to fraud detection, is GPU-accelerated.
 5. Pharmaceutical design
     - Uses parallel computing for running simulations of molecular dynamics
 
@@ -53,30 +56,28 @@ Here are just a few examples how parallel computing is helping to accelerate res
 </figure>
 
 ### Benefits of Parallel Computing:
- - Allows to solve problems in a shorter time.
- - Allows to solve larger, more detailed problems compared to serial execution.
- - Overall parallel computing is much better suited for modeling, simulating and understanding complex, real-world phenomena.
+ - It allows us to solve problems in a shorter time.
+ - Allows solving larger, more detailed problems compared to serial execution.
+ - Overall parallel computing is much better suited for modelling, simulating and understanding complex, real-world phenomena.
 
 ### Limitations and Disadvantages:
 
 - Some problems can not be broken into pieces of work that can be done independently
-- Not every problem can be solved in less time with multiple compute resources than with a single compute resource. Some problkems may not have enough inherent parallelism to exploit.
-- May be more costly in equipment (expensive interconnect)
+- Not every problem can be solved in less time with multiple compute resources than with a single computing resource. Some problems may not have enough inherent parallelism to exploit.
+- Could be more costly in equipment (expensive interconnect)
 - Coding expertise
 - Require time and effort
-
 
 #### Before you start your parallel computing project
 
 - Select the most appropriate parallelization options for your problem.
 - Estimate the effort and potential benefits.
 
-In this lesson we hope to give you knowledge and skills to make the right decisions on parallel computing projects.
-
+In this lesson, we hope to give you knowledge and skills to make the right decisions on parallel computing projects.
 
 ### How does a Parallel Program Work?
 
- Parallelism is the future of computing. Parallel programming  allows to increase the amount of processing power in a system. How does a parallel program work?
+ Parallelism is the future of computing. Parallel programming allows us to increase the amount of processing power in a system. How does a parallel program work?
 
 
 ### Traditional serial program
@@ -99,7 +100,7 @@ In this lesson we hope to give you knowledge and skills to make the right decisi
 
 - Modern desktop/laptop computers come equipped with multiple central processing units (cores) that can process many sets of instructions simultaneously.
 
-- Each core is equipped with vector unit that can process multiple data at one time. Vector units are described by the number of the bits that the vector unit can process at one time. For example, a 256 bit-wide vector unit can process four double precision floating point numbers simultaneously.
+- Each core is equipped with a vector unit that can process multiple data at one time. Vector units are described by the number of the bits that the vector unit can process at one time. For example, a 256 bit-wide vector unit can process four double-precision floating point numbers simultaneously.
 
 - Networks connect multiple stand-alone computers (nodes) to make larger parallel computer clusters.
 
@@ -111,7 +112,7 @@ For example, a typical Compute Canada cluster has thousands of computers (networ
 
 > ## What fraction of the total processing power can a serial program use?
 > Let’s consider an 8 core CPU with AVX-512 vector unit, commonly found in home desktops.
-- What percentage of the theoretical processing capability of this processor can a double precision serial program without vectorization use?
+- What percentage of the theoretical processing capability of this processor can a double-precision serial program without vectorization use?
 - What about a serial program with vectorization?
 >
 >>## Solution
@@ -120,7 +121,6 @@ For example, a typical Compute Canada cluster has thousands of computers (networ
 >>
 > {: .solution}
 {: .challenge}
-
 
 > ## [TOP 500](https://www.top500.org) publishes current details of the fastest computer systems.
 > - [The fastest supercomputer: IBM Summit](https://www.top500.org/system/179397)

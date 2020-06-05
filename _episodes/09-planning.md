@@ -11,9 +11,9 @@ keypoints:
 - Efficiently parallelizing a serial code needs some careful planning and
   comes with an overhead.
 - Shorter independent tasks need more overall communication.
-- Longer tasks can cause other resources being left unused.
+- Longer tasks can cause other resources to be left unused.
 - Large variations of tasks-lengths can cause resources to be left unused,
-  especially if the length of a task cannot approximated upfront.
+  especially if the length of a task cannot be approximated upfront.
 - There are many textbooks and publications that describe different parallel
   algorithms.  Try finding existing solutions for similar problems.
 - Domain Decomposition can be used in many cases to reduce communication by
@@ -22,7 +22,7 @@ keypoints:
 
 > ## Our Goals
 > * Run as much as possible in parallel.
-> * Keep all CPU-cores busy at all time.
+> * Keep all CPU-cores busy at all times.
 > * Avoid processes/threads having to wait long for data.
 {: .callout}
 
@@ -31,7 +31,7 @@ keypoints:
 
 ### Serial Algorithm
 
-The Serial MD algorithm written pseudo code looks somewhat like this:
+The Serial MD algorithm written as pseudo-code looks somewhat like this:
 
 #### Pseudo Code
 ```python
@@ -163,7 +163,7 @@ finalize()
 {: .error}
 
 With this scheme CPU&nbsp;1 will be responsible for many more interactions
-as CPU&nbsp;8.  This can easily approved upon by creating a pair-list upfront
+as CPU&nbsp;8.  This can easily improved by creating a pair-list upfront
 and evenly distributing particle-pairs for evaluation across the CPUs.
 
 
@@ -203,16 +203,16 @@ finalize()
 
 ### Using cut-offs
 
-Still this MD algorithm scales with $N_{particles}^2$, beyond which all
+Still, this MD algorithm scales with $N_{particles}^2$, beyond which all
 forces and potential-energy contributions are truncated and treated as zero,
-can restore near linear scaling.  One way to do this, is to bail out of
+can restore near-linear scaling.  One way to do this is to bail out of
 the loop over the pair-list after computing the distance if it is larger
 than $r_{cut-off}$.
 
 Further optimizations can be made by avoiding to compute the distances for
 all pairs at every step - essentially by keeping neighbor lists and using
 the fact that particles travel only small distances during a certain number
-of steps, however those are beyond the scope of this lesson and are well
+of steps, however, those are beyond the scope of this lesson and are well
 described in text-books, journal publications and technical manuals.
 
 
@@ -224,20 +224,20 @@ become a bottle-neck when using this Force- (or Particle-) Decomposition
 scheme, where particles are assigned to fixed processors as above.
 
 To reduce the amount of communication between processors and nodes, we can
-partition the simulation box along it's axes into smaller domains.
-The particles are then assigned to the processors depending in which domain
+partition the simulation box along its axes into smaller domains.
+The particles are then assigned to the processors depending on in which domain
 they are currently located.  This way many pair-interactions will be local
 within the same domain and therefore handled by the same processor.  For
 pairs of particles that are not located in the same domain, we can use e.g.
 the "eighth shell" method in which a processor handles those pairs, in which
-the second particle is located only in positive direction of the dimensions,
+the second particle is located only in the positive direction of the dimensions,
 as illustrated below.
 
 
 #### Domain Decomposition using Eight-Shell method
 ![eighth shell domain decomposition](../fig/planning/domain_decomposition.png)
 
-In this way each domain only needs to communicate with neighboring domains
+In this way, each domain only needs to communicate with neighboring domains
 in one direction as long as none of the domain's dimension shorter than the
 longest cut-off.
 
@@ -264,21 +264,21 @@ longest cut-off.
 
 ## Load Distribution
 
-Generally speaking the goal is to distribute the work across the available
+Generally speaking, the goal is to distribute the work across the available
 resources (processors) as evenly as possible, as this will result in the
 shortest amount of time and avoids some resources being left unused.
 
-#### Ideal Load: all tasks have same size
+#### Ideal Load: all tasks have the same size
 An ideal load distribution might look like this:
 
 ![Ideal Load](../fig/planning/ideal_load_distribution.png)
 
 ---
 
-#### Unbalanced Load: size of tasks differs
+#### Unbalanced Load: the size of tasks differs
 Whereas if the tasks that are distributed have varying length, the program
 needs to wait for the slowest task to finish.  Such situations are even worse
-in cases where a parallel execution is followed by a synchronization step,
+in cases where parallel execution is followed by a synchronization step,
 before proceeding to the next iteration of a larger-scope loop (e.g. next
 time-step, generation).
 
@@ -295,12 +295,12 @@ length.
 
 ---
 
-#### Larger Chunk-size evens out size of tasks
+#### Larger Chunk-size evens out the size of tasks
 Chunks consisting of many tasks (large chunk-size) can result relatively
 consistent lengths of the chunks, even if the lengths of the tasks are not
-pre-determined and have large variations.  However this can lead to
+pre-determined and have large variations.  However, this can lead to
 situations, where a large fraction of the processors is left unused, when
-by chance a chunk consists of many very long tasks, or as in the figure
+by chance, a chunk consists of many very long tasks, or as in the figure
 below, the number of chunks is sightly larger than the closest multiple of
 the processors.
 
@@ -321,10 +321,11 @@ Creating a queue (list) of independent tasks which are processed asynchronously
 can improve the utilization of resources especially if the tasks are sorted
 from the longest to the shortest.
 
-However special care needs to be taken to avoid race-conditions, where two
+However, special care needs to be taken to avoid race-conditions, where two
 processes take the same task from the stack.  Having a dedicated manager-
 process to assign the work to the compute processes introduces overhead
-and can become a bottle-neck when very large number of compute processes are
-involved.
+and can become a bottle-neck when a very large number of computing processes are involved.
 
 This also increases the amount of communication needed.
+
+{% include links.md %}

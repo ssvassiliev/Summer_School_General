@@ -3,7 +3,7 @@ title: "Parallel Programming Models"
 teaching: 15
 exercises: 10
 questions:
-- "What levels of parallelizm are available in moderm computer systems?"
+- "What levels of parallelism are available in modern computer systems?"
 - "How can a parallel program access different levels of parallelization?"
 objectives:
 - "Explain parallelism in modern computer systems"
@@ -16,7 +16,7 @@ keypoints:
 
 ### Parallel Programming Models
 
-Developing a parallel application requires an understanding of potential amount of parallelism in your appilcation and the best ways to expose this parallelism to the underlying computer architecture. Current hardware and programming languages give many different options to parallelize your application. Some of these options can be combined to yield even greater efficiency and speedup.
+Developing a parallel application requires an understanding of the potential amount of parallelism in your application and the best ways to expose this parallelism to the underlying computer architecture. Current hardware and programming languages give many different options to parallelize your application. Some of these options can be combined to yield even greater efficiency and speedup.
 
 ### Levels of Parallelism
 There are several layers of parallel computing:
@@ -24,12 +24,12 @@ There are several layers of parallel computing:
 2. Multithreading  (a way to spawn multiple cooperating threads sharing the same memory and working together on a larger task). Multithreading provides a relatively simple opportunity to achieve improved application performance with multi-core processors.
 3. Process-based parallelism
 
-Available hardware features influence the parallel strategies.
+Available hardware features influence parallel strategies.
 
-### Example workflow of a parallel application in 2D domain.
+### Example workflow of a parallel application in the 2D domain.
 
 - Discretize the problem into smaller cells or elements
-- Define operations to conduct on each element of the computationsl mesh
+- Define operations to conduct on each element of the computational mesh
 - Stencil operation involves a pattern of adjacent cells to calculate the new value for each cell.
 
 ![](../fig/parallel_app_1.svg)
@@ -44,7 +44,7 @@ Vectorization can be used to work on more than one unit of data at a time.
 
 ![](../fig/parallel_app_2.svg)
 
-- Most processors today have vector units that allow processors to operate on more than one piece of data (int, float,double) at a time.  For example, a vector operation shown in the figure is conducted on eight floats. This operation can be executed in a single clock cycle, with little overhead costs to the serial operation.
+- Most processors today have vector units that allow processors to operate on more than one piece of data (int, float, double) at a time.  For example, a vector operation shown in the figure is conducted on eight floats. This operation can be executed in a single clock cycle, with little overhead costs to the serial operation.
 
 ##### Example AVX2 program
 avx2_example.c
@@ -78,15 +78,15 @@ Most of today’s CPUs have several processing cores. So, we can use threading t
 
 ![](../fig/parallel_app_3.svg)
 
-Technically, a thread is defined as an independent stream of instructions that can be scheduled to run by the operating system.  From a developer poin of view thread is a "procedure" that runs independently from its main program.
+Technically, a thread is defined as an independent stream of instructions that can be scheduled to run by the operating system.  From a developer point of view, thread is a "procedure" that runs independently from its main program.
 
-Imagine a main program that contains a number of procedures. In a "multi-threaded" program all of these procedures can be scheduled to run simultaneously and/or independently by the operating system.
+Imagine the main program that contains a number of procedures. In a "multi-threaded" program all of these procedures can be scheduled to run simultaneously and/or independently by the operating system.
 
-Threads operate in shared memory multiprocessor architectures.
+Threads operate in shared-memory multiprocessor architectures.
 
-POSIX Threads (Pthreads) and OpenMP represent two most popular implementations of multiprocessing models. Pthreads library is a low-level API providing extensive control over threading operations. It is very flexible and provides very fine-grained control over multi threading operations. Being low-level it requires multiple steps to perform simple threading tasks.
+POSIX Threads (Pthreads) and OpenMP represent the two most popular implementations of multiprocessing models. Pthreads library is a low-level API providing extensive control over threading operations. It is very flexible and provides very fine-grained control over multi-threading operations. Being low-level it requires multiple steps to perform simple threading tasks.
 
-On the other hand, OpenMP is much higher level and much simpler to use.
+On the other hand, OpenMP is a much higher level and much simpler to use.
 
 ##### Example OpenMP program
 omp_example.c
@@ -125,13 +125,13 @@ return(0);
 
 #### Distributed memory / Message Passing
 
-Further parallelization can be achieved  by spreading out computations to a set of processes (tasks) that use their own local memory during computation.
+Further parallelization can be achieved by spreading out computations to a set of processes (tasks) that use their own local memory during computation.
 
 Multiple tasks can reside on the same physical machine and/or across an arbitrary number of machines.
 
 Tasks exchange data through communications by sending and receiving messages.
 
-OpenMPI and Intel MPI are two of the most popular implementations of message passing multiprocessing models installed on Compute Canada Systems.
+OpenMPI and Intel MPI are two of the most popular implementations of message passing multiprocessing models installed on Compute Canada systems.
 
 ![](../fig/parallel_app_4.svg)
 

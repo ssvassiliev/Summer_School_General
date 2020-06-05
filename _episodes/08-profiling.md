@@ -5,12 +5,11 @@ exercises: 20
 questions:
 - How do I identify the computationally expensive parts of my code?
 objectives:
-- Using a profiler too analyze the runtime-behavior of a program.
-- Identifying areas of the code with a potential for optimization and/or
+- Using a profiler to analyze the runtime behaviour of a program.
+- Identifying areas of the code with potential for optimization and/or
   parallelization.
 keypoints:
-- Don't start to parallelize or optimize your code without having used
-  a profiler first.
+- Don't start to parallelize or optimize your code without having used a profiler first.
 - A programmer can easily spend many hours of work "optimizing" a part
   of the code which eventually speeds up the program by only a minuscule
   amount.
@@ -23,12 +22,10 @@ keypoints:
 
 Programmers often tend to over-think design and might spend a lot of their
 time optimizing parts of the code that only contributes a small amount to
-the total runtime.  It is easy to misjudge the runtime behavior of a program.
+the total runtime.  It is easy to misjudge the runtime behaviour of a program.
 
-> In order to make an informed decision what parts of the code to optimize,
-> one can use a performance analysis tool, or short "*profiler*", to analyze
-> the runtime behavior of a program and measure how much CPU-time is used
-> by each function.
+> ## What parts of the code to optimize?
+> To make an informed decision what parts of the code to optimize, one can use a performance analysis tool, or short "*profiler*", to analyze the runtime behaviour of a program and measure how much CPU-time is used by each function.
 {: .callout}
 
 We will analyze an example program, for simple Molecular Dynamics (MD)
@@ -111,7 +108,7 @@ MD
   DT, the size of each time step, is   0.100000    
 
   At each step, we report the potential and kinetic energies.
-  The sum of these energies should be a constant.
+  The sum of these energies should be constant.
   As an accuracy check, we also print the relative error
   in the total energy.
 
@@ -202,7 +199,7 @@ Each sample counts as 0.01 seconds.
 | total s/call       | the average number of milliseconds spent in this function and its descendents per call, if this function is profiled, else blank. |
 | name               | the name of the function.  This is the minor sort for this listing. |
 
-In this example the most time is spent computing the forces and potential
+In this example, the most time is spent computing the forces and potential
 energy.  Calculating the distance between the particles is at 3rd rank and
 roughly 2x faster than either of the above.
 
@@ -274,7 +271,7 @@ index % time    self  children    called     name
 {: .output}
 
 Each entry in this table consists of several lines.  The line with the
-index number at the left hand margin lists the current function.
+index number at the left-hand margin lists the current function.
 The lines above it list the functions that called this function,
 and the lines below it list the functions this one called.
 
@@ -293,7 +290,7 @@ This line lists:
 
 #### Index by function name:
 ```
-Index by function name
+Index by the function name
 
    [2] MAIN__                  [5] calc_pot_               [9] s_to_i4_
    [6] calc_distance_          [1] compute_               [13] s_to_r8_
@@ -311,7 +308,7 @@ in Python: Gprof2Dot and GraphViz.
 
 #### Install GraphViz and Gprof2Dot
 
-First these two packages need to be  installed using pip. Using the `--user`
+First, these two packages need to be  installed using pip. Using the `--user`
 option, will install them into the user's home directory under
 `~/.local/lib/pythonX.Y/site-packages`.
 
@@ -329,7 +326,7 @@ from the GraphViz package.  It can be saved in different formats, e.g. PNG
 
 If a local X-server is running and X-forwarding is enabled for the current
 SSH session, we can use the `display` command from the ImageMagick tools
-to show the image. Otherwise we can download it and display it with a program
+to show the image. Otherwise, we can download it and display it with a program
 of our choice.
 
 ```bash
@@ -396,3 +393,5 @@ Options:
                         Filter all modules not in a specified path
 ```
 {: .output}
+
+{% include links.md %}
