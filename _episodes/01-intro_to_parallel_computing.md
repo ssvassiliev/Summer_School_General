@@ -14,11 +14,6 @@ keypoints:
 - "Modern computers have several levels of parallelism"
 ---
 
-Introduce setup and connection to cluster someplace before using examples.
-Concrete examples of weak/strong scaling.
-Drive by nature of the problem.
-Compilers auto avx. Specific loop structure.
-
 ### Why to learn parallel computing?
 - Building faster serial computers became constrained due to both physical and practical reasons.
 
